@@ -6,111 +6,185 @@
     <title>【公告】超理论坛停止运营通知 - 超理论坛存档</title>
     <style>
         body {
-            background-color: #f5f5dc;
+            background-color: #f0f0e0;
             margin: 0;
             padding: 20px;
             font-family: "宋体", SimSun, "Times New Roman", serif;
             font-size: 14px;
             color: #333;
+            background-image: linear-gradient(#e8e8d8 1px, transparent 1px);
+            background-size: 100% 40px;
         }
         #container {
             max-width: 780px;
             margin: 0 auto;
             background-color: #fff;
             border: 1px solid #999;
-            box-shadow: 2px 2px 5px rgba(0,0,0,0.1);
+            box-shadow: 3px 3px 8px rgba(0, 0, 0, 0.12);
+            border-radius: 2px;
         }
         #header {
-            background-color: #2c3e50;
+            background-color: #1e2d3d;
             color: #ecf0f1;
-            padding: 12px 20px;
-            font-size: 16px;
+            padding: 10px 20px;
+            font-size: 14px;
+            border-bottom: 3px solid #c0392b;
         }
         #header a {
-            color: #ecf0f1;
+            color: #f0d78c;
             text-decoration: none;
+            font-size: 13px;
+        }
+        #header a:hover {
+            text-decoration: underline;
         }
         .nav-thread {
-            padding: 8px 20px;
-            background: #e9e9e9;
-            border-bottom: 1px solid #ccc;
+            padding: 7px 20px;
+            background: #f4f4f0;
+            border-bottom: 1px solid #d5d5d0;
             font-size: 12px;
+            color: #777;
         }
         .nav-thread a {
             color: #0645ad;
             text-decoration: none;
         }
+        .nav-thread a:hover {
+            text-decoration: underline;
+        }
         .thread-title {
-            padding: 15px 20px 5px;
-            font-size: 20px;
+            padding: 16px 20px 8px;
+            font-size: 19px;
             font-weight: bold;
-            border-bottom: 1px solid #ddd;
+            border-bottom: 2px solid #ddd;
+            color: #1a1a1a;
+            letter-spacing: 0.5px;
         }
         .post-container {
             padding: 0 20px;
+            background: #fdfdfb;
         }
         .post {
-            border-bottom: 1px dashed #ddd;
-            padding: 15px 0;
+            border-bottom: 1px dashed #d5d5d0;
+            padding: 14px 0;
+            transition: background 0.2s;
+        }
+        .post:hover {
+            background: #fafaf5;
+            margin: 0 -20px;
+            padding-left: 20px;
+            padding-right: 20px;
         }
         .post-header {
             font-size: 12px;
-            color: #666;
+            color: #777;
             margin-bottom: 8px;
+            line-height: 1.6;
         }
         .post-header strong {
-            color: #2c3e50;
+            color: #1e2d3d;
             font-size: 14px;
+            letter-spacing: 0.3px;
         }
         .post-header .badge {
-            background: #c00;
+            background: #b73225;
             color: white;
-            padding: 1px 5px;
+            padding: 1px 6px;
             font-size: 10px;
             margin-left: 6px;
+            border-radius: 2px;
+            letter-spacing: 0.5px;
+        }
+        .post-header .user-meta {
+            color: #999;
+            font-size: 11px;
+            margin-left: 4px;
         }
         .post-body {
-            line-height: 1.8;
+            line-height: 1.9;
             font-size: 14px;
+            color: #2a2a2a;
+        }
+        .post-body p {
+            margin: 6px 0;
         }
         .post-body .redacted {
-            background: #222;
-            color: #222;
-            padding: 0 4px;
+            background: #1a1a1a;
+            color: #1a1a1a;
+            padding: 0 5px;
             font-family: monospace;
+            border-radius: 2px;
+            cursor: default;
+            user-select: none;
+            transition: color 0.3s;
+        }
+        .post-body .redacted:hover {
+            color: #ccc;
         }
         .post-body .highlight {
-            background: #ffffaa;
+            background: #fff8b0;
             font-weight: bold;
+            padding: 0 2px;
+        }
+        .post-body .quote-inline {
+            background: #f0f0e8;
+            border-left: 3px solid #ccc;
+            padding: 4px 10px;
+            margin: 6px 0;
+            color: #555;
+            font-size: 13px;
+            display: inline-block;
+            border-radius: 0 3px 3px 0;
         }
         .signature {
-            border-top: 1px dotted #ccc;
-            margin-top: 12px;
+            border-top: 1px dotted #d5d5d0;
+            margin-top: 10px;
             padding-top: 6px;
             font-size: 12px;
-            color: #888;
-        }
-        .edited {
-            font-size: 11px;
             color: #999;
             font-style: italic;
         }
-        #footer {
-            background-color: #e0e0e0;
-            text-align: center;
-            padding: 12px;
+        .edited {
             font-size: 11px;
-            color: #666;
-            border-top: 1px solid #bbb;
-            margin-top: 20px;
+            color: #aaa;
+            font-style: italic;
+            margin-top: 8px;
         }
         .locked-notice {
-            background: #f2dede;
-            border: 1px solid #ebccd1;
+            background: #fdf3f3;
+            border: 1px solid #e8c9c9;
             color: #a94442;
-            padding: 8px 20px;
+            padding: 9px 20px;
             font-size: 12px;
-            margin: 15px 20px;
+            margin: 16px 0;
+            border-radius: 3px;
+            text-align: center;
+            letter-spacing: 0.5px;
+        }
+        #footer {
+            background-color: #e8e8e0;
+            text-align: center;
+            padding: 14px;
+            font-size: 11px;
+            color: #888;
+            border-top: 1px solid #c5c5c0;
+            margin-top: 20px;
+            line-height: 1.8;
+        }
+        #footer span {
+            font-family: "Courier New", monospace;
+            color: #666;
+            background: #f8f8f0;
+            padding: 1px 4px;
+            border-radius: 2px;
+        }
+        a {
+            color: #0645ad;
+            text-decoration: none;
+        }
+        a:hover {
+            text-decoration: underline;
+            color: #053a7a;
         }
     </style>
 </head>
@@ -118,6 +192,7 @@
 <div id="container">
     <div id="header">
         <a href="index.html">← 返回超理论坛首页</a>
+        &nbsp;<span style="font-size:11px;color:#aaa;">（存档快照）</span>
     </div>
     <div class="nav-thread">
         <a href="index.html">超理论坛</a> &raquo; <a href="#">站务公告</a> &raquo; 帖子详情
@@ -131,52 +206,51 @@
         <!-- 主帖：管理员发布停运通知 -->
         <div class="post" id="post1">
             <div class="post-header">
-                <strong>admin</strong> <span class="badge">管理员</span><br>
+                <strong>admin</strong> <span class="badge">管理员</span>
+                <span class="user-meta">· 注册于2008-03-12 · 帖子 2,847</span><br>
                 发表于 2016-05-20 22:15 &nbsp;|&nbsp; 只看该作者
             </div>
             <div class="post-body">
-                <p>各位超理论坛的会员：</p>
-                <p>很遗憾地通知大家，由于不可抗力因素，<strong>超理论坛将于2016年5月20日23:59正式停止运营。</strong></p>
-                <p>具体原因如下：</p>
-                <ol>
-                    <li>核心服务器因硬件老化多次宕机，修复成本远超预期。</li>
-                    <li>站务组成员因现实原因先后离开，目前仅剩我一人维持。</li>
-                    <li>近期数据异常事件频发（包括图床失效、时间戳混乱、附件丢失），初步排查怀疑存在未被授权的数据库修改操作。</li>
-                </ol>
-                <p><strong>关于数据：</strong>技术部已经在5月17日完成了最后一次全站备份，并将其保存在一个离线存储设备中。理论上，所有帖子和用户数据都未丢失，只是无法再通过本站进行在线访问。</p>
-                <p><strong>关于后续：</strong>我个人可能会在数月后尝试以个人博客形式公开部分精华帖，但论坛形式将不再继续。如果大家希望继续交流，请在下方回帖留下其他联系方式。</p>
-                <p>感谢各位在2008年至2016年间的陪伴。超理论坛见证了许多深刻的思想碰撞，也记录下了一些美好时光。希望这些回忆能永存于大家心中。</p>
-                <p style="text-align:right;">管理员 admin<br>2016.05.20</p>
+                <p>各位，长话短说吧。</p>
+                <p>论坛撑不下去了。<strong>今晚23:59，超理论坛正式关站。</strong></p>
+                <p>原因其实大家多少也感觉到了——服务器这半年崩了七八次，上个月硬盘又出坏道，修的费用够租两年新机器的。站务组的人陆陆续续都走了，现在后台就剩我一个。实在是扛不住了。</p>
+                <p>另外有一件事，我觉得还是应该说一下。最近几个月后台日志乱七八糟的——图床莫名其妙挂掉、有些帖子的发帖时间自己跳来跳去、还有几个附件怎么找都找不到了。查了半天，不像是单纯的系统老化，我怀疑有人动过数据库。如果你们谁手里有重要的帖子，自己本地留一份吧，别指望服务器上的版本一定靠谱。</p>
+                <p><strong>备份的事：</strong>5月17号我这边做了一次全站数据导出，存在一个离线硬盘里。东西应该都在，只是以后没法在线看了。回头等我把手头的事理顺了，可能会挑一些精华帖放到个人博客上——但论坛这个形式，肯定是到此为止了。</p>
+                <p>想继续联系的，底下留个邮箱或者别的联系方式吧。八年了，说没感情是假的。08年那会儿我刚大学毕业，现在孩子都快上小学了。时间真快。</p>
+                <p style="text-align:right;">—— admin<br>2016.05.20 夜</p>
                 <p class="edited">[ 本帖最后由 admin 于 2016-05-21 00:17 最后编辑 ]</p>
             </div>
             <div class="signature">
-                签名：<span style="font-family:monospace;">5765626d6173746572</span> <!-- 注：这是 "Webmaster" 的十六进制表示，可作为小彩蛋 -->
+                签名：<span style="font-family:monospace;letter-spacing:1px;">5765626d6173746572</span>
             </div>
         </div>
 
         <!-- 2楼：用户询问搬迁 -->
         <div class="post" id="post2">
             <div class="post-header">
-                <strong>流浪的猫</strong><br>
+                <strong>流浪的猫</strong>
+                <span class="user-meta">· 注册于2012-07-19 · 帖子 416</span><br>
                 发表于 2016-05-20 22:34
             </div>
             <div class="post-body">
-                <p>太突然了……不过说实话，这段时间论坛半死不活的样子，大家心里也都有准备吧。</p>
-                <p>想问一下，有没有人知道别的去处？我在隔壁听说有人在搞一个新的理论论坛，不知道是不是和这边有关。</p>
+                <p>……虽然早就有心理准备了，这段时间三天两头打不开，首页也跟荒了一样。但真看到公告还是有点堵。</p>
+                <p>说正事，我之前在隔壁听说有人搞了个新的理论站，好像已经跑了一阵子了，不知道跟咱们这边有没有关系。有没有知情的出来说一声？好歹有个去处。</p>
+                <p>另外admin你那个备份，以后要真放出来了记得通知啊。我13年写的那篇长帖自己都没留底，全指望你那边了。</p>
             </div>
         </div>
 
         <!-- 3楼：搬迁信息 - 关键剧情点 -->
         <div class="post" id="post3">
             <div class="post-header">
-                <strong>真相挖掘机</strong><br>
+                <strong>真相挖掘机</strong>
+                <span class="user-meta">· 注册于2010-03-05 · 帖子 1,203</span><br>
                 发表于 2016-05-20 23:01
             </div>
             <div class="post-body">
-                <p>回复 2楼：你说的那个新站我知道。地址是：<a href="https://www.chaoli.org" style="color:#0645ad;">https://www.chaoli.org</a> </p>
-                <p>不过新站的主要用户已经不是我们这批人了。不过在那里我还是看到了许多熟人，看来大家还没有放弃论坛。</p>
-                <p>感觉心里还是有些感慨吧。虽然只是换了一个站，但之前那么多的珍贵帖子说没就没了。那都是大家的心血啊。</p>
-                <p>如果有人知道旧站备份的去向，请私信我（我问了楼主楼主不回我！）。我还期待着能够重回往日时光。</p>
+                <p>回2楼，那个站我知道。地址在这：<a href="https://www.chaoli.org" style="color:#0645ad;">https://www.chaoli.org</a></p>
+                <p>不过说实话，那边的主力已经不是咱这批人了。偶尔能看到几个熟面孔，但整体氛围跟以前不太一样。新用户居多，讨论的方向也有点偏。当然，有个地方总比没有强。</p>
+                <p>就是心里有点不是滋味。八年攒下来的帖子，那么多长文、争论、考据，说没就没了。那些东西才是超理真正的底子，不是换块牌子就能续上的。</p>
+                <p>对了，admin你那个离线备份到底存哪儿了？我私信你两天了你也没回。如果方便的话能不能大概说一下——不是催你放出来，就是想知道那些数据还安全。毕竟你帖子里也说了数据库被动过，我有点不放心。</p>
             </div>
             <div class="signature">
                 签名：<em>真相就像底片，总会在暗处显影。</em>
@@ -186,14 +260,15 @@
         <!-- 4楼：最后的回帖，暗示异常 -->
         <div class="post" id="post4">
             <div class="post-header">
-                <strong>Faker</strong><br>
+                <strong>Faker</strong>
+                <span class="user-meta">· 注册于2011-11-08 · 帖子 837</span><br>
                 发表于 2016-05-20 23:58
             </div>
             <div class="post-body">
                 <p>还有两分钟。</p>
-                <p>结果到了最后也就我们这几个人了。换做以前这里可是很热闹的。</p>
-                <p>唉……还记得以前这里很火。应该说世事难料吗？如果kitty没有退出就好了。</p>
-                <p>再见了，超理论坛。再见了，大家。</p>
+                <p>刷了半天就咱们几个。以前这种公告帖早就翻好几页了，现在连个告别都凑不满一桌人。</p>
+                <p>算了，不说那些没用的了。这些年谢谢大家。特别谢谢kitty——虽然你可能看不到这条了。要是当初你没走，有些事大概也不会变成现在这样吧。</p>
+                <p>再见了，超理论坛。再见了，各位。</p>
             </div>
         </div>
 
@@ -205,7 +280,8 @@
 
     <div id="footer">
         © 2008-2016 超理论坛. Powered by BBS Engine v2.1.4<br>
-        当前时间戳: <span style="font-family:monospace;">2016-05-21 03:49:12</span> (服务器最后存活记录)
+        当前时间戳: <span>2016-05-21 03:49:12</span> &nbsp;(服务器最后存活记录)<br>
+        <span style="font-size:10px;color:#bbb;">此页面为自动抓取存档，可能存在格式缺失</span>
     </div>
 </div>
 </body>

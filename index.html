@@ -20,7 +20,7 @@
             border: 1px solid #999;
             box-shadow: 2px 2px 5px rgba(0,0,0,0.1);
         }
-        /* 顶部区域，包含横幅和右侧用户按钮 */
+        /* 顶部区域 */
         #top-area {
             background-color: #2c3e50;
             color: #ecf0f1;
@@ -45,7 +45,6 @@
             color: #b0b0b0;
             margin-top: 5px;
         }
-        /* 右上角按钮 */
         #user-buttons {
             display: flex;
             gap: 10px;
@@ -70,7 +69,6 @@
             cursor: not-allowed;
             text-decoration: line-through;
         }
-        /* 导航栏 */
         #navbar {
             background-color: #e0e0e0;
             padding: 6px 20px;
@@ -89,7 +87,6 @@
             color: #c00;
             cursor: pointer;
         }
-        /* 公告栏 */
         #announcement {
             background-color: #fff3cd;
             border: 1px dashed #ffc107;
@@ -103,7 +100,6 @@
             font-weight: bold;
             text-decoration: underline;
         }
-        /* 搜索框 */
         #search-bar {
             margin: 10px 20px;
             padding: 8px;
@@ -119,9 +115,8 @@
             padding: 4px;
             border: 1px solid #aaa;
             background: #f8f8f8;
-            color: #999;
+            color: #333;
             font-family: inherit;
-            cursor: not-allowed;
         }
         #search-bar button {
             padding: 4px 12px;
@@ -129,14 +124,11 @@
             border: 1px solid #666;
             color: white;
             font-family: inherit;
-            cursor: not-allowed;
+            cursor: pointer;
         }
-        .admin-hint {
-            color: #c00;
-            margin-left: 10px;
-            font-weight: bold;
+        #search-bar button:hover {
+            background: #666;
         }
-        /* 主内容 */
         #main-content {
             padding: 0 20px 20px;
         }
@@ -213,7 +205,6 @@
             margin-left: 6px;
             font-weight: bold;
         }
-        /* 翻页 */
         .pagination {
             margin: 15px 0;
             text-align: center;
@@ -243,11 +234,13 @@
             background: #fafafa;
             cursor: not-allowed;
         }
-        /* 模态登录框 */
         .modal {
             display: none;
             position: fixed;
-            top: 0; left: 0; width: 100%; height: 100%;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
             background: rgba(0,0,0,0.6);
             justify-content: center;
             align-items: center;
@@ -307,7 +300,6 @@
             margin-top: 5px;
             display: none;
         }
-        /* 登录成功状态 */
         #login-status {
             font-size: 12px;
             color: #aaccaa;
@@ -318,7 +310,7 @@
 </head>
 <body>
 <div id="container">
-    <!-- 顶部区域：标题 + 用户按钮 -->
+    <!-- 顶部区域 -->
     <div id="top-area">
         <div id="header">
             <h1>超理论坛</h1>
@@ -351,9 +343,8 @@
     <!-- 搜索框 -->
     <div id="search-bar">
         <span>🔍 搜索帖子：</span>
-        <input type="text" disabled placeholder="输入关键词..." title="搜索功能已停用">
-        <button disabled>搜索</button>
-        <span class="admin-hint">⚠ 该功能仅限管理员使用，普通会员无权访问</span>
+        <input type="text" id="search-input" placeholder="输入关键词...">
+        <button id="search-btn">搜索</button>
     </div>
 
     <!-- 主内容 -->
@@ -396,7 +387,7 @@
     <div id="footer">
         © 2008-2016 超理论坛. Powered by <span style="font-family:monospace;">BBS Engine v2.1.4</span><br>
         当前时间戳: <span class="corrupt">2016-05-21 03:49:12</span> (服务器最后存活记录) <br>
-        <span style="color:#c00;">⚠ 您正在访问的是静态存档副本，所有交互功能均已禁用。</span>
+        <span style="color:#c00;">⚠ 您正在访问的是静态存档副本，部分数据可能已损坏。</span>
     </div>
 </div>
 
@@ -417,10 +408,9 @@
 </div>
 
 <script>
-    // ========== 帖子数据存储 ==========
-    // 准备了28条帖子，足够多页
+    // ========== 帖子数据 ==========
     const allPosts = [
-        { title: "【公告】超理论坛停止运营通知", author: "admin", reply: "2016-05-20 22:15 by admin", link: "notice.html", isImportant: true },
+        { title: "【公告】超理论坛停止运营通知", author: "admin", reply: "2016-05-20 23:58 by Faker", link: "notice.html", isImportant: true },
         { title: "服务器最近老崩，是不是要凉了？", author: "深海鳕鱼", reply: "2016-05-18 09:44 by 匿名用户", link: "record1.html" },
         { title: "【技术部】备份工作已经完成，请务必在20号之前下载个人数据", author: "sysop", reply: "2016-05-17 16:30 by admin", link: "record2.html" },
         { title: "[已删除] 【REDACTED】关于kitty事件的讨论", author: "---", reply: "---", link: "#", deleted: true },
@@ -451,13 +441,43 @@
     ];
 
     const postsPerPage = 10;
-    let currentPage = 1;
     const totalPages = Math.ceil(allPosts.length / postsPerPage);
+    let isLoggedIn = false;
 
-    // 渲染帖子表格
+    // 从 sessionStorage 恢复登录状态
+    if (sessionStorage.getItem('adminLoggedIn') === 'true') {
+        isLoggedIn = true;
+        document.getElementById('login-status').style.display = 'inline';
+        document.getElementById('btn-login').style.display = 'none';
+        document.getElementById('btn-register').style.display = 'none';
+    }
+
+    // 获取当前页码（从 URL hash 中解析）
+    function getCurrentPageFromHash() {
+        const hash = window.location.hash;
+        const match = hash.match(/page=(\d+)/);
+        if (match) {
+            const page = parseInt(match[1], 10);
+            if (page >= 1 && page <= totalPages) return page;
+        }
+        return 1; // 默认第一页
+    }
+
+    // 渲染帖子表格（根据登录状态决定是否显示内容）
     function renderPosts(page) {
         const tbody = document.getElementById('post-list-body');
         tbody.innerHTML = '';
+
+        // 未登录且页码 > 1 时，显示错误信息
+        if (page > 1 && !isLoggedIn) {
+            const tr = document.createElement('tr');
+            tr.innerHTML = `<td colspan="3" style="color:#c00; text-align:center; padding:20px;">
+                <span class="corrupt">[数据损坏]</span> 该页存档无法加载，可能因存储介质故障导致数据丢失。
+            </td>`;
+            tbody.appendChild(tr);
+            return;
+        }
+
         const start = (page - 1) * postsPerPage;
         const end = Math.min(start + postsPerPage, allPosts.length);
         for (let i = start; i < end; i++) {
@@ -490,51 +510,78 @@
     function renderPagination(current) {
         const pagDiv = document.getElementById('pagination');
         let html = '';
-        // 前一页
+
+        // 上一页
         if (current > 1) {
-            html += `<a onclick="goToPage(${current - 1})">‹ 上一页</a>`;
+            html += `<a href="#page=${current - 1}" onclick="return false;" class="page-link">‹ 上一页</a>`;
         } else {
             html += `<span class="disabled">‹ 上一页</span>`;
         }
+
         // 页码
         for (let i = 1; i <= totalPages; i++) {
             if (i === current) {
                 html += `<span class="current">${i}</span>`;
             } else {
-                // 第一页之外点击需要管理员权限
-                html += `<a onclick="goToPage(${i})">${i}</a>`;
+                html += `<a href="#page=${i}" onclick="return false;" class="page-link">${i}</a>`;
             }
         }
-        // 后一页
+
+        // 下一页
         if (current < totalPages) {
-            html += `<a onclick="goToPage(${current + 1})">下一页 ›</a>`;
+            html += `<a href="#page=${current + 1}" onclick="return false;" class="page-link">下一页 ›</a>`;
         } else {
             html += `<span class="disabled">下一页 ›</span>`;
         }
-        // 总页数提示
+
         html += `<span style="margin-left:10px; font-size:11px; color:#888;">共 ${totalPages} 页</span>`;
         pagDiv.innerHTML = html;
+
+        // 为所有页码链接绑定点击事件
+        document.querySelectorAll('.page-link').forEach(link => {
+            link.addEventListener('click', function(e) {
+                e.preventDefault();
+                const href = this.getAttribute('href');
+                window.location.hash = href.substring(1); // 去掉 #
+            });
+        });
     }
 
-    // 翻页函数
-    function goToPage(page) {
-        if (page < 1 || page > totalPages) return;
-        // 模拟：只有管理员才能访问第一页之后的页面
-        if (page > 1 && !isLoggedIn) {
-            alert('权限不足：只有管理员账号才能浏览归档页面。请先登录。');
-            // 如果已登录但非管理员，同样提示（这里登录就是admin，所以简单处理）
+    // 根据 hash 更新整个视图
+    function updateView() {
+        const page = getCurrentPageFromHash();
+        renderPosts(page);
+        renderPagination(page);
+    }
+
+    // 监听 hash 变化
+    window.addEventListener('hashchange', updateView);
+
+    // 搜索按钮事件
+    document.getElementById('search-btn').addEventListener('click', function() {
+        const keyword = document.getElementById('search-input').value.trim();
+        if (!isLoggedIn) {
+            alert('权限不足');
             return;
         }
-        currentPage = page;
-        renderPosts(currentPage);
-        renderPagination(currentPage);
-    }
+        if (keyword === '') {
+            alert('请输入搜索关键词。');
+            return;
+        }
+        // 模拟管理员搜索（这里仅作提示）
+        alert('搜索功能暂未开放，但您已获得管理员权限。关键词：“' + keyword + '”');
+    });
+
+    // 回车搜索
+    document.getElementById('search-input').addEventListener('keypress', function(e) {
+        if (e.key === 'Enter') {
+            document.getElementById('search-btn').click();
+        }
+    });
 
     // ========== 登录系统 ==========
-    let isLoggedIn = false;
-    // 预设管理员账号（可根据需要修改）
     const ADMIN_USER = "admin";
-    const ADMIN_PASS = "ultratruth2024";  // 给朋友的密码可以设为他们知道的梗
+    const ADMIN_PASS = "ultratruth2024";
 
     function openLogin() {
         if (isLoggedIn) {
@@ -556,20 +603,17 @@
         const password = document.getElementById('login-password').value;
         const errorEl = document.getElementById('login-error');
         if (username === ADMIN_USER && password === ADMIN_PASS) {
-            // 登录成功
             isLoggedIn = true;
+            sessionStorage.setItem('adminLoggedIn', 'true');
             document.getElementById('login-status').style.display = 'inline';
             document.getElementById('btn-login').style.display = 'none';
             document.getElementById('btn-register').style.display = 'none';
             closeLogin();
-            // 如果当前在第一页之后，刷新页面以解锁翻页（状态已变）
-            if (currentPage > 1) {
-                goToPage(currentPage);
-            }
+            // 刷新当前视图，如果之前因未登录被屏蔽的页码现在可以显示了
+            updateView();
             alert('登录成功！您已获得管理员权限，可以浏览所有存档页面。');
         } else {
             errorEl.style.display = 'block';
-            // 震动一下输入框
             document.getElementById('login-username').style.borderColor = '#c00';
             document.getElementById('login-password').style.borderColor = '#c00';
             setTimeout(() => {
@@ -593,13 +637,12 @@
 
     // ========== 初始加载 ==========
     window.onload = function() {
-        // 默认展示第一页
-        currentPage = 1;
-        renderPosts(currentPage);
-        renderPagination(currentPage);
-        // 登录状态初始隐藏
-        document.getElementById('login-status').style.display = 'none';
-        // 注册按钮始终禁用，已经用 disabled 属性保证
+        // 如果 hash 为空，默认跳转到 #page=1
+        if (!window.location.hash || !window.location.hash.match(/page=\d+/)) {
+            window.location.hash = 'page=1';
+        } else {
+            updateView();
+        }
     };
 </script>
 </body>

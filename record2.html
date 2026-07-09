@@ -6,105 +6,161 @@
     <title>【技术部】备份工作已经完成，请务必在20号之前下载个人数据 - 超理论坛存档</title>
     <style>
         body {
-            background-color: #f5f5dc;
+            background-color: #f0f0e0;
             margin: 0;
             padding: 20px;
             font-family: "宋体", SimSun, "Times New Roman", serif;
             font-size: 14px;
             color: #333;
+            background-image: linear-gradient(#e8e8d8 1px, transparent 1px);
+            background-size: 100% 40px;
         }
         #container {
             max-width: 780px;
             margin: 0 auto;
             background-color: #fff;
             border: 1px solid #999;
-            box-shadow: 2px 2px 5px rgba(0,0,0,0.1);
+            box-shadow: 3px 3px 8px rgba(0,0,0,0.12);
+            border-radius: 2px;
         }
         #header {
-            background-color: #2c3e50;
+            background-color: #1e2d3d;
             color: #ecf0f1;
-            padding: 12px 20px;
-            font-size: 16px;
+            padding: 10px 20px;
+            font-size: 14px;
+            border-bottom: 3px solid #c0392b;
         }
         #header a {
-            color: #ecf0f1;
+            color: #f0d78c;
             text-decoration: none;
+            font-size: 13px;
+        }
+        #header a:hover {
+            text-decoration: underline;
         }
         .nav-thread {
-            padding: 8px 20px;
-            background: #e9e9e9;
-            border-bottom: 1px solid #ccc;
+            padding: 7px 20px;
+            background: #f4f4f0;
+            border-bottom: 1px solid #d5d5d0;
             font-size: 12px;
+            color: #777;
         }
         .nav-thread a {
             color: #0645ad;
             text-decoration: none;
         }
+        .nav-thread a:hover {
+            text-decoration: underline;
+        }
         .thread-title {
-            padding: 15px 20px 5px;
-            font-size: 20px;
+            padding: 16px 20px 8px;
+            font-size: 19px;
             font-weight: bold;
-            border-bottom: 1px solid #ddd;
+            border-bottom: 2px solid #ddd;
+            color: #1a1a1a;
+            letter-spacing: 0.5px;
         }
         .post-container {
             padding: 0 20px;
+            background: #fdfdfb;
         }
         .post {
-            border-bottom: 1px dashed #ddd;
-            padding: 15px 0;
+            border-bottom: 1px dashed #d5d5d0;
+            padding: 14px 0;
+            transition: background 0.2s;
+        }
+        .post:hover {
+            background: #fafaf5;
+            margin: 0 -20px;
+            padding-left: 20px;
+            padding-right: 20px;
         }
         .post-header {
             font-size: 12px;
-            color: #666;
+            color: #777;
             margin-bottom: 8px;
+            line-height: 1.6;
         }
         .post-header strong {
-            color: #2c3e50;
+            color: #1e2d3d;
             font-size: 14px;
+            letter-spacing: 0.3px;
         }
         .post-header .badge {
             background: #888;
             color: white;
-            padding: 1px 5px;
+            padding: 1px 6px;
             font-size: 10px;
             margin-left: 6px;
+            border-radius: 2px;
+        }
+        .post-header .user-meta {
+            color: #999;
+            font-size: 11px;
+            margin-left: 4px;
         }
         .post-body {
-            line-height: 1.8;
+            line-height: 1.9;
             font-size: 14px;
+            color: #2a2a2a;
+        }
+        .post-body p {
+            margin: 6px 0;
+        }
+        .post-body .highlight {
+            background: #fff8b0;
+            font-weight: bold;
+            padding: 0 2px;
         }
         .signature {
-            border-top: 1px dotted #ccc;
-            margin-top: 12px;
+            border-top: 1px dotted #d5d5d0;
+            margin-top: 10px;
             padding-top: 6px;
             font-size: 12px;
-            color: #888;
-        }
-        .edited {
-            font-size: 11px;
             color: #999;
             font-style: italic;
         }
-        .highlight {
-            background: #ffffaa;
-            font-weight: bold;
+        .edited {
+            font-size: 11px;
+            color: #aaa;
+            font-style: italic;
+            margin-top: 8px;
         }
         #footer {
-            background-color: #e0e0e0;
+            background-color: #e8e8e0;
             text-align: center;
-            padding: 12px;
+            padding: 14px;
             font-size: 11px;
-            color: #666;
-            border-top: 1px solid #bbb;
+            color: #888;
+            border-top: 1px solid #c5c5c0;
             margin-top: 20px;
+            line-height: 1.8;
+        }
+        #footer span {
+            font-family: "Courier New", monospace;
+            color: #666;
+            background: #f8f8f0;
+            padding: 1px 4px;
+            border-radius: 2px;
         }
         .locked-notice {
-            background: #f2dede;
-            border: 1px solid #ebccd1;
+            background: #fdf3f3;
+            border: 1px solid #e8c9c9;
             color: #a94442;
-            padding: 8px 20px;
+            padding: 9px 20px;
             font-size: 12px;
-            margin: 15px 20px;
+            margin: 16px 0;
+            border-radius: 3px;
+            text-align: center;
+            letter-spacing: 0.5px;
+        }
+        a {
+            color: #0645ad;
+            text-decoration: none;
+        }
+        a:hover {
+            text-decoration: underline;
+            color: #053a7a;
         }
     </style>
 </head>
@@ -112,6 +168,7 @@
 <div id="container">
     <div id="header">
         <a href="index.html">← 返回超理论坛首页</a>
+        &nbsp;<span style="font-size:11px;color:#aaa;">（存档快照）</span>
     </div>
     <div class="nav-thread">
         <a href="index.html">超理论坛</a> &raquo; <a href="#">站务公告</a> &raquo; 帖子详情
@@ -125,14 +182,14 @@
         <!-- 主帖：sysop -->
         <div class="post" id="post1">
             <div class="post-header">
-                <strong>sysop</strong> <span class="badge">技术部</span><br>
+                <strong>sysop</strong> <span class="badge">技术部</span>
+                <span class="user-meta">· 注册于2008-06-15 · 帖子 741</span><br>
                 发表于 2016-05-17 16:30 &nbsp;|&nbsp; 只看该作者
             </div>
             <div class="post-body">
-                <p>各位会员：</p>
-                <p>技术部已经完成了对全站公开数据的最后一次完整备份，备份副本已转移至离线存储。从现在起到20日服务器关闭，大家仍可以手动保存自己的帖子与私信。</p>
-                <p>本次备份的代号为 <span class="highlight">Backup2016</span>，所有封包均已校验通过。感谢各位多年来对超理论坛的支持。</p>
-                <p style="text-align:right;">技术部 sysop<br>2016.05.17</p>
+                <p>说一声，全站公开数据的最后一次完整备份已经跑完了，副本转到了离线存储里。从现在到20号服务器关停，大家还可以手动保存自己的帖子和私信，抓紧时间。</p>
+                <p>这次备份项目代号是 <span class="highlight">Backup2016</span>，所有封包都校验过了，数据完整性没问题。这几年谢谢各位的贡献，超理能撑到现在，靠的就是你们写下的那些东西。</p>
+                <p style="text-align:right;">—— sysop<br>2016.05.17</p>
                 <p class="edited">[ 本帖最后由 sysop 于 2016-05-17 16:35 最后编辑 ]</p>
             </div>
             <div class="signature">
@@ -143,24 +200,26 @@
         <!-- 2楼：深海鳕鱼 -->
         <div class="post" id="post2">
             <div class="post-header">
-                <strong>深海鳕鱼</strong><br>
+                <strong>深海鳕鱼</strong>
+                <span class="user-meta">· 注册于2009-04-15 · 帖子 1,562</span><br>
                 发表于 2016-05-17 16:52
             </div>
             <div class="post-body">
-                <p>辛苦了。也就是说 20 号一过，这里就彻底变成只读遗迹了？想想还是有点难受。</p>
-                <p>另外，个人数据下载有没有什么快捷方法？帖子太多的话一页页手动复制也太费劲了。</p>
+                <p>辛苦。也就是说20号一过这儿就彻底变遗迹了……虽然早就有准备，真到了这一步还是有点堵。</p>
+                <p>对了，个人帖子太多的话一页页手动保存也太折磨了，有没有批量下载的法子？</p>
             </div>
         </div>
 
         <!-- 3楼：技术宅 -->
         <div class="post" id="post3">
             <div class="post-header">
-                <strong>技术宅</strong><br>
+                <strong>技术宅</strong>
+                <span class="user-meta">· 注册于2010-09-02 · 帖子 892</span><br>
                 发表于 2016-05-17 17:08
             </div>
             <div class="post-body">
-                <p>回复 2楼：我写了个简单的爬虫脚本，可以批量抓取某个用户的所有帖子并保存为 txt。如果有需要我可以传上来。</p>
-                <p>不过用之前最好先跟 sysop 确认一下，频繁抓取会不会给服务器增加负担。现在这服务器可经不起折腾了。</p>
+                <p>回2楼：我写了个简易爬虫，能批量抓某个用户的所有帖子，存成txt。需要的话我传附件。</p>
+                <p>不过用之前最好先跟sysop确认下，频繁请求别把这破服务器再搞崩了。现在它可经不起折腾。</p>
             </div>
             <div class="signature">
                 签名：<span style="font-family:monospace;">// todo: fix the world</span>
@@ -170,35 +229,38 @@
         <!-- 4楼：sysop 补充回复，埋下登录提示 -->
         <div class="post" id="post4">
             <div class="post-header">
-                <strong>sysop</strong> <span class="badge">技术部</span><br>
+                <strong>sysop</strong> <span class="badge">技术部</span>
+                <span class="user-meta">· 注册于2008-06-15 · 帖子 741</span><br>
                 发表于 2016-05-17 17:22
             </div>
             <div class="post-body">
-                <p>技术宅的脚本应该没问题，只要别开太多并发就行。</p>
-                <p>另外，如果哪位对备份的具体技术细节感兴趣，或者想查看技术部在关闭前留下的内部备忘录，可以用我的备用账号登录。账号名就是 sysop，密码是这次备份的代号。那个账号还保留了一小部分后台权限，能看到一些普通会员看不到的文档。</p>
-                <p>不过权限有限，主要是些技术记录，别抱太大期望。</p>
+                <p>技术宅那个脚本没问题，别开太多并发就行。</p>
+                <p>另外，如果有谁对备份的具体技术细节感兴趣，或者想翻翻技术部在关站前留的内部备忘录，可以用我的备用账号登一下后台。用户名就是 sysop ，密码跟这次备份项目代号一样——你们懂的。那个账号还剩一点残存的后台权限，能看到些普通会员看不到的旧文档。</p>
+                <p>不过别指望太多，都是些技术记录，没什么劲爆内容。</p>
             </div>
         </div>
 
         <!-- 5楼：流浪的猫 -->
         <div class="post" id="post5">
             <div class="post-header">
-                <strong>流浪的猫</strong><br>
+                <strong>流浪的猫</strong>
+                <span class="user-meta">· 注册于2009-08-21 · 帖子 416</span><br>
                 发表于 2016-05-17 18:10
             </div>
             <div class="post-body">
-                <p>行，我去试试看那个账号，万一能看到点以前的站务讨论也挺好的，就当考古了。</p>
+                <p>行，我去试下那个账号。万一能翻出点以前的站务讨论也算考古了。</p>
             </div>
         </div>
 
         <!-- 6楼：Faker -->
         <div class="post" id="post6">
             <div class="post-header">
-                <strong>Faker</strong><br>
+                <strong>Faker</strong>
+                <span class="user-meta">· 注册于2011-11-08 · 帖子 837</span><br>
                 发表于 2016-05-17 18:40
             </div>
             <div class="post-body">
-                <p>技术部还有人愿意留后门，挺好的。</p>
+                <p>技术部还留了条后门，不错。至少证明到最后还有人上心。</p>
             </div>
             <div class="signature">
                 签名：<em>真实与虚假的界限，有时只是几个比特。</em>
@@ -208,11 +270,12 @@
         <!-- 7楼：焦虑的会员 -->
         <div class="post" id="post7">
             <div class="post-header">
-                <strong>焦虑的会员</strong><br>
+                <strong>焦虑的会员</strong>
+                <span class="user-meta">· 注册于2014-03-30 · 帖子 205</span><br>
                 发表于 2016-05-17 19:55
             </div>
             <div class="post-body">
-                <p>我赶紧去备份了，谢谢 sysop 和技术宅。</p>
+                <p>不说了，我先去备份。谢谢sysop和技术宅。</p>
             </div>
         </div>
 
@@ -224,7 +287,8 @@
 
     <div id="footer">
         © 2008-2016 超理论坛. Powered by BBS Engine v2.1.4<br>
-        当前时间戳: 2016-05-21 03:49:12 (服务器最后存活记录)
+        当前时间戳: <span>2016-05-21 03:49:12</span> &nbsp;(服务器最后存活记录)<br>
+        <span style="font-size:10px;color:#bbb;">此页面为自动抓取存档，可能存在格式缺失</span>
     </div>
 </div>
 </body>

@@ -6,86 +6,117 @@
     <title>服务器最近老崩，是不是要凉了？ - 超理论坛存档</title>
     <style>
         body {
-            background-color: #f5f5dc;
+            background-color: #f0f0e0;
             margin: 0;
             padding: 20px;
             font-family: "宋体", SimSun, "Times New Roman", serif;
             font-size: 14px;
             color: #333;
+            background-image: linear-gradient(#e8e8d8 1px, transparent 1px);
+            background-size: 100% 40px;
         }
         #container {
             max-width: 780px;
             margin: 0 auto;
             background-color: #fff;
             border: 1px solid #999;
-            box-shadow: 2px 2px 5px rgba(0,0,0,0.1);
+            box-shadow: 3px 3px 8px rgba(0, 0, 0, 0.12);
+            border-radius: 2px;
         }
         #header {
-            background-color: #2c3e50;
+            background-color: #1e2d3d;
             color: #ecf0f1;
-            padding: 12px 20px;
-            font-size: 16px;
+            padding: 10px 20px;
+            font-size: 14px;
+            border-bottom: 3px solid #c0392b;
         }
         #header a {
-            color: #ecf0f1;
+            color: #f0d78c;
             text-decoration: none;
+            font-size: 13px;
+        }
+        #header a:hover {
+            text-decoration: underline;
         }
         .nav-thread {
-            padding: 8px 20px;
-            background: #e9e9e9;
-            border-bottom: 1px solid #ccc;
+            padding: 7px 20px;
+            background: #f4f4f0;
+            border-bottom: 1px solid #d5d5d0;
             font-size: 12px;
+            color: #777;
         }
         .nav-thread a {
             color: #0645ad;
             text-decoration: none;
         }
+        .nav-thread a:hover {
+            text-decoration: underline;
+        }
         .thread-title {
-            padding: 15px 20px 5px;
-            font-size: 20px;
+            padding: 16px 20px 8px;
+            font-size: 19px;
             font-weight: bold;
-            border-bottom: 1px solid #ddd;
+            border-bottom: 2px solid #ddd;
+            color: #1a1a1a;
+            letter-spacing: 0.5px;
         }
         .post-container {
             padding: 0 20px;
+            background: #fdfdfb;
         }
         .post {
-            border-bottom: 1px dashed #ddd;
-            padding: 15px 0;
+            border-bottom: 1px dashed #d5d5d0;
+            padding: 14px 0;
+            transition: background 0.2s;
+        }
+        .post:hover {
+            background: #fafaf5;
+            margin: 0 -20px;
+            padding-left: 20px;
+            padding-right: 20px;
         }
         .post-header {
             font-size: 12px;
-            color: #666;
+            color: #777;
             margin-bottom: 8px;
+            line-height: 1.6;
         }
         .post-header strong {
-            color: #2c3e50;
+            color: #1e2d3d;
             font-size: 14px;
+            letter-spacing: 0.3px;
         }
         .post-header .badge {
             background: #888;
             color: white;
-            padding: 1px 5px;
+            padding: 1px 6px;
             font-size: 10px;
             margin-left: 6px;
+            border-radius: 2px;
+            letter-spacing: 0.5px;
+        }
+        .post-header .user-meta {
+            color: #999;
+            font-size: 11px;
+            margin-left: 4px;
         }
         .post-body {
-            line-height: 1.8;
+            line-height: 1.9;
             font-size: 14px;
+            color: #2a2a2a;
+        }
+        .post-body p {
+            margin: 6px 0;
         }
         .post-body .mention {
-            color: #2c3e50;
+            color: #1e2d3d;
             font-weight: bold;
         }
         .signature {
-            border-top: 1px dotted #ccc;
-            margin-top: 12px;
+            border-top: 1px dotted #d5d5d0;
+            margin-top: 10px;
             padding-top: 6px;
             font-size: 12px;
-            color: #888;
-        }
-        .edited {
-            font-size: 11px;
             color: #999;
             font-style: italic;
         }
@@ -93,25 +124,47 @@
             background: #f5f5f5;
             color: #999;
             font-style: italic;
-            padding: 10px;
+            padding: 10px 20px;
             border: 1px dashed #ddd;
-        }
-        #footer {
-            background-color: #e0e0e0;
-            text-align: center;
-            padding: 12px;
-            font-size: 11px;
-            color: #666;
-            border-top: 1px solid #bbb;
-            margin-top: 20px;
+            margin: 12px 0;
+            font-size: 12px;
+            border-radius: 3px;
         }
         .locked-notice {
-            background: #f2dede;
-            border: 1px solid #ebccd1;
+            background: #fdf3f3;
+            border: 1px solid #e8c9c9;
             color: #a94442;
-            padding: 8px 20px;
+            padding: 9px 20px;
             font-size: 12px;
-            margin: 15px 20px;
+            margin: 16px 0;
+            border-radius: 3px;
+            text-align: center;
+            letter-spacing: 0.5px;
+        }
+        #footer {
+            background-color: #e8e8e0;
+            text-align: center;
+            padding: 14px;
+            font-size: 11px;
+            color: #888;
+            border-top: 1px solid #c5c5c0;
+            margin-top: 20px;
+            line-height: 1.8;
+        }
+        #footer span {
+            font-family: "Courier New", monospace;
+            color: #666;
+            background: #f8f8f0;
+            padding: 1px 4px;
+            border-radius: 2px;
+        }
+        a {
+            color: #0645ad;
+            text-decoration: none;
+        }
+        a:hover {
+            text-decoration: underline;
+            color: #053a7a;
         }
     </style>
 </head>
@@ -119,6 +172,7 @@
 <div id="container">
     <div id="header">
         <a href="index.html">← 返回超理论坛首页</a>
+        &nbsp;<span style="font-size:11px;color:#aaa;">（存档快照）</span>
     </div>
     <div class="nav-thread">
         <a href="index.html">超理论坛</a> &raquo; <a href="#">水漫金山</a> &raquo; 帖子详情
@@ -132,13 +186,14 @@
         <!-- 主帖：深海鳕鱼 -->
         <div class="post" id="post1">
             <div class="post-header">
-                <strong>深海鳕鱼</strong><br>
+                <strong>深海鳕鱼</strong>
+                <span class="user-meta">· 注册于2009-04-15 · 帖子 1,562</span><br>
                 发表于 2016-05-14 16:22 &nbsp;|&nbsp; 只看该作者
             </div>
             <div class="post-body">
-                <p>最近一个月，论坛动不动就502，刷新十次能有三次进去就算运气好。今天下午干脆挂了整整一刻钟，恢复之后也卡得要命。</p>
-                <p>以前咱们这多热闹啊，水区每天都能刷出好几页新帖，现在首页上挂着的还是上周的讨论。说实话，要不是偶尔还有几个老面孔冒泡，我都快以为这里成遗迹了。</p>
-                <p>有没有人知道服务器到底什么情况？是没人维护了吗？我记着以前有管理员定期发维护公告的，现在连个公告也见不着了。</p>
+                <p>这一个月，论坛动不动就502，刷新十次能进来三次都算运气好的。今天下午干脆直接挂了十五分钟，恢复之后还卡得要死，发个帖转好几秒。</p>
+                <p>以前水区一天能刷好几页新帖，现在首页上挂着的还是上周的讨论，往下翻两下就到底了。说实话，要不是偶尔几个老ID还冒个泡，我真觉得这儿已经成遗迹了。</p>
+                <p>有没有人知道服务器到底啥情况？没人管了吗？我记得以前管理员隔段时间就发维护公告，现在连个响都听不见。</p>
             </div>
             <div class="signature">
                 签名：<em>深海之下，暗流涌动。</em>
@@ -148,13 +203,14 @@
         <!-- 2楼：技术宅 -->
         <div class="post" id="post2">
             <div class="post-header">
-                <strong>技术宅</strong><br>
+                <strong>技术宅</strong>
+                <span class="user-meta">· 注册于2010-09-02 · 帖子 892</span><br>
                 发表于 2016-05-14 16:45
             </div>
             <div class="post-body">
-                <p>说服务器没人维护倒也不是完全对。我查了一下，主机本身还在续费，基本的环境也跑着，但确实少了一个真正能修修补补的人。</p>
-                <p>以前论坛后台主要是 <span class="mention">Kitty</span> 在管，服务器调优、插件更新、防攻击，全是他一个人顶着。自从他去年退出管理团队之后，这块好像就交给了别人，但接手的人明显没怎么上心。小毛病攒多了就成现在这样了。</p>
-                <p>怀念 Kitty 在的时候，论坛连加载速度都比现在快一截。</p>
+                <p>说完全没人管倒也不是。主机还在续费，基础环境也跑着，但少了个真正能修修补补的人。</p>
+                <p>以前后台主要是 <span class="mention">Kitty</span> 在撑着，服务器调优、插件更新、防CC攻击全是他一个人扛。去年他退出管理团队之后，这块好像交出去了，但接手的明显没怎么上心。小毛病攒到现在，不崩才怪。</p>
+                <p>那会儿 Kitty 在的时候，论坛加载速度都比现在快一截，半夜三点维护都是常事。唉。</p>
             </div>
             <div class="signature">
                 签名：<span style="font-family:monospace;">// todo: fix the world</span>
@@ -164,27 +220,29 @@
         <!-- 3楼：流浪的猫 -->
         <div class="post" id="post3">
             <div class="post-header">
-                <strong>流浪的猫</strong><br>
+                <strong>流浪的猫</strong>
+                <span class="user-meta">· 注册于2009-08-21 · 帖子 416</span><br>
                 发表于 2016-05-14 17:20
             </div>
             <div class="post-body">
-                <p>看到 Kitty 这个名字突然好感慨。我大概是09年注册的，那会儿超理真是火得一塌糊涂，每天都有大佬发长文，评论区能盖几百楼。当时 Kitty 还是普通版主，后来升的管理员，做事特别负责。</p>
-                <p>也不知道为什么，他走了以后，很多眼熟的ID也逐渐不说话了。可能大家都有自己的事要忙，也可能少了某种氛围吧。我现在也只是偶尔回来看看。</p>
+                <p>看到 Kitty 这名突然好感慨。我09年注册的，那时候超理火得不行，天天有大佬发长帖，底下一刷就是几百楼。Kitty 当时还是普通版主，后来升的管理员，做事特别细。</p>
+                <p>也不知道咋回事，他走之后好多熟悉的ID慢慢就不说话了。可能是大家都忙，也可能是少了那种氛围吧。我现在也就偶尔回来刷一眼。</p>
             </div>
             <div class="signature">
                 签名：<em>流浪过许多地方，这里曾经是家。</em>
             </div>
         </div>
 
-        <!-- 4楼：新人过客 -->
+        <!-- 4楼：刚注册的过客 -->
         <div class="post" id="post4">
             <div class="post-header">
-                <strong>刚刚注册的过客</strong><br>
+                <strong>刚注册的过客</strong>
+                <span class="user-meta">· 注册于2016-05-11 · 帖子 3</span><br>
                 发表于 2016-05-14 18:05
             </div>
             <div class="post-body">
-                <p>呃，我是前几天才找到这个论坛的，因为搜索一个理论问题发现了这里。看以前的帖子觉得质量好高，赶紧注册了想参与讨论，结果发现……根本没人啊。</p>
-                <p>原来这里曾经很热闹吗？听你们说的 Kitty 到底是何方神圣？感觉像个传奇人物。</p>
+                <p>呃，我是前几天搜一个问题才找到这儿的。翻了翻旧帖觉得质量真高，赶紧注册了想参与讨论，结果发现……根本没人啊。</p>
+                <p>原来这里以前很热闹吗？你们说的 Kitty 到底是谁啊，感觉像个传说里的人物。</p>
             </div>
         </div>
 
@@ -195,26 +253,27 @@
                 发表于 2016-05-14 19:30
             </div>
             <div class="post-body">
-                <p>Kitty 退出的具体原因我也不清楚，但听说和站内某次争论有关，好像和论坛以后的发展方向有分歧。那之后他就再也没上线过，连告别帖都没发。</p>
-                <p>不过这些事现在说也没什么意义了。服务器能撑一天是一天吧，至少数据还在。</p>
+                <p>Kitty退出具体怎么回事我也不太清楚，听说是和站里某次大争论有关，好像是关于论坛以后往哪个方向走，分歧挺大。那之后他就再没上过线，连个告别帖都没发。</p>
+                <p>不过现在说这些也没啥意义了。服务器能撑一天是一天吧，至少数据还在。</p>
             </div>
         </div>
 
         <!-- 6楼：被删除的回复 -->
         <div class="deleted-reply">
-            [ 此回复已被管理员或版主删除 ]
-            <br>操作者：sysop &nbsp; 操作时间：2016-05-14 20:02
+            [ 此回复已被管理员或版主删除 ]<br>
+            操作者：admin &nbsp; 操作时间：2016-05-14 20:02 &nbsp; 原因：内容引发争议
         </div>
 
         <!-- 7楼：Faker -->
         <div class="post" id="post7">
             <div class="post-header">
-                <strong>Faker</strong><br>
+                <strong>Faker</strong>
+                <span class="user-meta">· 注册于2011-11-08 · 帖子 837</span><br>
                 发表于 2016-05-15 00:11
             </div>
             <div class="post-body">
-                <p>深夜刷了一下，居然能打开。也不知道还能撑几天。</p>
-                <p>如果哪天这里真的彻底打不开了，希望有人还记得超理论坛，记得 Kitty，记得那些讨论到天亮的夜晚。晚安。</p>
+                <p>大半夜刷了半天才进来，刚才又502了。居然还能发帖。</p>
+                <p>也不知道这儿还能撑几天。要是哪天彻底打不开了，希望还有人记得超理论坛，记得 Kitty，记得那些讨论到天亮的晚上。晚安。</p>
             </div>
         </div>
 
@@ -226,7 +285,8 @@
 
     <div id="footer">
         © 2008-2016 超理论坛. Powered by BBS Engine v2.1.4<br>
-        当前时间戳: 2016-05-21 03:49:12 (服务器最后存活记录)
+        当前时间戳: <span>2016-05-21 03:49:12</span> &nbsp;(服务器最后存活记录)<br>
+        <span style="font-size:10px;color:#bbb;">此页面为自动抓取存档，可能存在格式缺失</span>
     </div>
 </div>
 </body>
