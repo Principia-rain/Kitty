@@ -1,0 +1,606 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>超理论坛 - 存档</title>
+    <style>
+        body {
+            background-color: #f5f5dc;
+            margin: 0;
+            padding: 20px;
+            font-family: "宋体", SimSun, "Times New Roman", serif;
+            font-size: 14px;
+            color: #333;
+        }
+        #container {
+            max-width: 780px;
+            margin: 0 auto;
+            background-color: #fff;
+            border: 1px solid #999;
+            box-shadow: 2px 2px 5px rgba(0,0,0,0.1);
+        }
+        /* 顶部区域，包含横幅和右侧用户按钮 */
+        #top-area {
+            background-color: #2c3e50;
+            color: #ecf0f1;
+            padding: 10px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 2px solid #1a252f;
+        }
+        #header {
+            text-align: left;
+        }
+        #header h1 {
+            margin: 0;
+            font-size: 28px;
+            letter-spacing: 4px;
+            font-weight: normal;
+            text-shadow: 1px 1px 2px #000;
+        }
+        #header .subtitle {
+            font-size: 12px;
+            color: #b0b0b0;
+            margin-top: 5px;
+        }
+        /* 右上角按钮 */
+        #user-buttons {
+            display: flex;
+            gap: 10px;
+            align-items: center;
+        }
+        #user-buttons button {
+            background: #3a5068;
+            border: 1px solid #5d7b9e;
+            color: #ddd;
+            padding: 6px 14px;
+            font-family: inherit;
+            font-size: 13px;
+            cursor: pointer;
+            border-radius: 2px;
+        }
+        #user-buttons button:hover {
+            background: #4f6d8c;
+        }
+        #user-buttons button:disabled {
+            background: #2c3e50;
+            color: #6c7a89;
+            cursor: not-allowed;
+            text-decoration: line-through;
+        }
+        /* 导航栏 */
+        #navbar {
+            background-color: #e0e0e0;
+            padding: 6px 20px;
+            border-bottom: 1px solid #bbb;
+            font-size: 12px;
+            color: #666;
+        }
+        #navbar a {
+            color: #888;
+            text-decoration: line-through;
+            margin-right: 20px;
+            cursor: default;
+        }
+        #navbar a:last-child {
+            text-decoration: none;
+            color: #c00;
+            cursor: pointer;
+        }
+        /* 公告栏 */
+        #announcement {
+            background-color: #fff3cd;
+            border: 1px dashed #ffc107;
+            margin: 12px 20px;
+            padding: 10px 15px;
+            font-size: 13px;
+            color: #856404;
+        }
+        #announcement a {
+            color: #b85c00;
+            font-weight: bold;
+            text-decoration: underline;
+        }
+        /* 搜索框 */
+        #search-bar {
+            margin: 10px 20px;
+            padding: 8px;
+            background: #eee;
+            border: 1px solid #ccc;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 12px;
+        }
+        #search-bar input {
+            flex: 1;
+            padding: 4px;
+            border: 1px solid #aaa;
+            background: #f8f8f8;
+            color: #999;
+            font-family: inherit;
+            cursor: not-allowed;
+        }
+        #search-bar button {
+            padding: 4px 12px;
+            background: #888;
+            border: 1px solid #666;
+            color: white;
+            font-family: inherit;
+            cursor: not-allowed;
+        }
+        .admin-hint {
+            color: #c00;
+            margin-left: 10px;
+            font-weight: bold;
+        }
+        /* 主内容 */
+        #main-content {
+            padding: 0 20px 20px;
+        }
+        .section-title {
+            font-size: 16px;
+            font-weight: bold;
+            border-bottom: 2px solid #2c3e50;
+            padding-bottom: 4px;
+            margin: 20px 0 10px;
+            color: #2c3e50;
+        }
+        table.post-list {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 13px;
+        }
+        table.post-list th {
+            background-color: #2c3e50;
+            color: white;
+            padding: 8px 10px;
+            text-align: left;
+            font-weight: normal;
+            font-size: 12px;
+        }
+        table.post-list td {
+            padding: 8px 10px;
+            border-bottom: 1px solid #ddd;
+            vertical-align: top;
+        }
+        table.post-list tr:hover {
+            background-color: #f9f9f9;
+        }
+        .post-title a {
+            color: #0645ad;
+            text-decoration: none;
+        }
+        .post-title a:visited {
+            color: #663366;
+        }
+        .post-meta {
+            color: #888;
+            font-size: 11px;
+        }
+        .deleted-thread {
+            color: #aaa;
+            text-decoration: line-through;
+        }
+        .deleted-thread a {
+            color: #aaa;
+            cursor: default;
+            text-decoration: line-through;
+        }
+        .corrupt {
+            font-family: monospace;
+            background: #222;
+            color: #0f0;
+            padding: 2px 4px;
+            font-size: 12px;
+        }
+        #footer {
+            background-color: #e0e0e0;
+            text-align: center;
+            padding: 12px;
+            font-size: 11px;
+            color: #666;
+            border-top: 1px solid #bbb;
+        }
+        .warning-badge {
+            display: inline-block;
+            background: #c00;
+            color: white;
+            padding: 2px 6px;
+            font-size: 10px;
+            margin-left: 6px;
+            font-weight: bold;
+        }
+        /* 翻页 */
+        .pagination {
+            margin: 15px 0;
+            text-align: center;
+            font-size: 13px;
+        }
+        .pagination a, .pagination span {
+            display: inline-block;
+            padding: 4px 10px;
+            margin: 0 2px;
+            border: 1px solid #ccc;
+            background: #f5f5f5;
+            color: #333;
+            text-decoration: none;
+        }
+        .pagination a:hover {
+            background: #ddd;
+            cursor: pointer;
+        }
+        .pagination .current {
+            background: #2c3e50;
+            color: white;
+            border-color: #1a252f;
+            font-weight: bold;
+        }
+        .pagination .disabled {
+            color: #aaa;
+            background: #fafafa;
+            cursor: not-allowed;
+        }
+        /* 模态登录框 */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(0,0,0,0.6);
+            justify-content: center;
+            align-items: center;
+            z-index: 100;
+        }
+        .modal.active {
+            display: flex;
+        }
+        .modal-content {
+            background: #fff;
+            border: 2px solid #2c3e50;
+            width: 320px;
+            padding: 20px;
+            box-shadow: 3px 3px 10px rgba(0,0,0,0.4);
+        }
+        .modal-content h3 {
+            margin: 0 0 15px;
+            font-size: 18px;
+            color: #2c3e50;
+            border-bottom: 1px solid #ddd;
+            padding-bottom: 8px;
+        }
+        .modal-content label {
+            font-size: 13px;
+            display: block;
+            margin: 10px 0 4px;
+        }
+        .modal-content input {
+            width: 100%;
+            padding: 6px;
+            border: 1px solid #aaa;
+            font-family: inherit;
+            box-sizing: border-box;
+        }
+        .modal-buttons {
+            margin-top: 20px;
+            text-align: right;
+        }
+        .modal-buttons button {
+            padding: 6px 16px;
+            margin-left: 8px;
+            font-family: inherit;
+            cursor: pointer;
+        }
+        .btn-login {
+            background: #2c3e50;
+            color: white;
+            border: 1px solid #1a252f;
+        }
+        .btn-cancel {
+            background: #ddd;
+            border: 1px solid #aaa;
+        }
+        .error-msg {
+            color: #c00;
+            font-size: 12px;
+            margin-top: 5px;
+            display: none;
+        }
+        /* 登录成功状态 */
+        #login-status {
+            font-size: 12px;
+            color: #aaccaa;
+            margin-left: 10px;
+            display: none;
+        }
+    </style>
+</head>
+<body>
+<div id="container">
+    <!-- 顶部区域：标题 + 用户按钮 -->
+    <div id="top-area">
+        <div id="header">
+            <h1>超理论坛</h1>
+            <div class="subtitle">【存档模式】站点已于 2016.05.20 停止运营，仅供只读浏览</div>
+        </div>
+        <div id="user-buttons">
+            <span id="login-status">已登录：admin</span>
+            <button id="btn-login" onclick="openLogin()">登 录</button>
+            <button id="btn-register" disabled title="注册功能已停用">注 册 (已停用)</button>
+        </div>
+    </div>
+
+    <!-- 导航栏 -->
+    <div id="navbar">
+        <a href="#" onclick="return false;">首页</a>
+        <a href="#" onclick="return false;">板块导航</a>
+        <a href="#" onclick="return false;">会员列表</a>
+        <a href="#" onclick="return false;">图库</a>
+        <a href="#" onclick="return false;">帮助</a>
+        <a href="notice.html" style="text-decoration:underline; color:#b85c00;">系统公告</a>
+    </div>
+
+    <!-- 公告 -->
+    <div id="announcement">
+        ⚠ <strong>系统通告：</strong>本站已永久停止服务，详情请查阅
+        <a href="notice.html">《超理论坛停运通知》</a> (最后更新: 2016-05-20)
+        <span class="warning-badge">置顶</span>
+    </div>
+
+    <!-- 搜索框 -->
+    <div id="search-bar">
+        <span>🔍 搜索帖子：</span>
+        <input type="text" disabled placeholder="输入关键词..." title="搜索功能已停用">
+        <button disabled>搜索</button>
+        <span class="admin-hint">⚠ 该功能仅限管理员使用，普通会员无权访问</span>
+    </div>
+
+    <!-- 主内容 -->
+    <div id="main-content">
+        <div class="section-title">▎最新帖子 (水漫金山 · 存档)</div>
+        <table class="post-list">
+            <thead>
+                <tr>
+                    <th width="60%">标题</th>
+                    <th width="15%">作者</th>
+                    <th width="25%">最后回复</th>
+                </tr>
+            </thead>
+            <tbody id="post-list-body">
+                <!-- 动态渲染帖子 -->
+            </tbody>
+        </table>
+
+        <!-- 翻页区域 -->
+        <div class="pagination" id="pagination">
+            <!-- 动态生成页码 -->
+        </div>
+
+        <!-- 错误提示块 -->
+        <div style="margin-top: 20px; background: #f8d7da; border:1px solid #f5c6cb; padding:10px; font-size:12px; color:#721c24;">
+            <span class="corrupt">[ERROR]</span> 数据库连接超时，部分帖子内容可能无法正常显示。<br>
+            <span class="corrupt">[WARN]</span> 文件完整性校验失败，附件均已下线。
+        </div>
+
+        <!-- 友情链接失效 -->
+        <div style="margin-top: 15px; font-size: 12px; color: #999;">
+            <span>友情链接：</span>
+            <a href="#" style="color:#999; text-decoration:line-through;">理论研究所</a> &nbsp;|&nbsp;
+            <a href="#" style="color:#999; text-decoration:line-through;">奇点档案馆</a> &nbsp;|&nbsp;
+            <span style="color:#999;">深空论坛</span> <span style="color:#c00;">[链接失效]</span>
+        </div>
+    </div>
+
+    <!-- 底部 -->
+    <div id="footer">
+        © 2008-2016 超理论坛. Powered by <span style="font-family:monospace;">BBS Engine v2.1.4</span><br>
+        当前时间戳: <span class="corrupt">2016-05-21 03:49:12</span> (服务器最后存活记录) <br>
+        <span style="color:#c00;">⚠ 您正在访问的是静态存档副本，所有交互功能均已禁用。</span>
+    </div>
+</div>
+
+<!-- 登录模态框 -->
+<div class="modal" id="login-modal">
+    <div class="modal-content">
+        <h3>管理员登录</h3>
+        <div id="login-error" class="error-msg">用户名或密码错误，请重试。</div>
+        <label>用户名：</label>
+        <input type="text" id="login-username" placeholder="请输入管理员账号">
+        <label>密码：</label>
+        <input type="password" id="login-password" placeholder="请输入密码">
+        <div class="modal-buttons">
+            <button class="btn-cancel" onclick="closeLogin()">取消</button>
+            <button class="btn-login" onclick="performLogin()">登录</button>
+        </div>
+    </div>
+</div>
+
+<script>
+    // ========== 帖子数据存储 ==========
+    // 准备了28条帖子，足够多页
+    const allPosts = [
+        { title: "【公告】超理论坛停止运营通知", author: "admin", reply: "2016-05-20 22:15 by admin", link: "notice.html", isImportant: true },
+        { title: "服务器最近老崩，是不是要凉了？", author: "深海鳕鱼", reply: "2016-05-18 09:44 by 匿名用户", link: "record1.html" },
+        { title: "【技术部】备份工作已经完成，请务必在20号之前下载个人数据", author: "sysop", reply: "2016-05-17 16:30 by admin", link: "record2.html" },
+        { title: "[已删除] 【REDACTED】关于kitty事件的讨论", author: "---", reply: "---", link: "#", deleted: true },
+        { title: "有没有人知道为什么图床全部失效了？", author: "像素猎人", reply: "2016-05-15 11:20 by 深海鳕鱼", link: "#" },
+        { title: "水一贴：大家备份好数据后打算去哪里？", author: "流浪的猫", reply: "2016-05-19 23:58 by 最后的人", link: "#" },
+        { title: "【转】据说站长已经失联两周了……", author: "真相挖掘机", reply: "2016-05-19 08:12 by 匿名", link: "#" },
+        { title: "论坛的搜索功能好像已经坏了好几个月了", author: "老用户002", reply: "2016-04-28 14:33 by 技术宅", link: "#" },
+        { title: "还有人在维护吗？私信管理员根本不回", author: "焦虑的会员", reply: "2016-05-10 07:55 by 旁观者", link: "#" },
+        { title: "这地方越来越像鬼城了，发个帖纪念一下", author: "最后的守护者", reply: "2016-05-19 22:01 by 流浪的猫", link: "#" },
+        { title: "发现一个奇怪的后台入口，有人懂吗？", author: "探秘者", reply: "2016-05-04 18:20 by admin", link: "#" },
+        { title: "所有附件都下载不了了，包括以前的精华帖", author: "资料收集狂", reply: "2016-05-12 10:15 by 老用户002", link: "#" },
+        { title: "这不会是黑客攻击吧？数据会不会已经泄露了", author: "安全第一", reply: "2016-05-08 21:40 by 真相挖掘机", link: "#" },
+        { title: "贴吧有人提到超理论坛可能涉及某些敏感内容", author: "搬运工", reply: "2016-05-06 13:22 by 匿名", link: "#" },
+        { title: "站长最后登录时间还是3月份……", author: "观察者", reply: "2016-05-01 17:59 by 焦虑的会员", link: "#" },
+        { title: "你们有没有收到过奇怪的站内信？", author: "困惑者", reply: "2016-04-25 08:33 by 探秘者", link: "#" },
+        { title: "论坛时间戳错乱了，现在显示的是2012年", author: "细节控", reply: "2016-04-20 12:00 by 技术宅", link: "#" },
+        { title: "备份的数据好像也不完整，好多帖子丢失了", author: "sysop", reply: "2016-05-16 20:10 by admin", link: "#" },
+        { title: "【传言】管理员内部有分歧，导致站点关闭", author: "小道消息", reply: "2016-05-14 09:00 by 围观群众", link: "#" },
+        { title: "这个论坛曾经很有名的，怎么就没了", author: "怀旧者", reply: "2016-05-11 16:45 by 最后的守护者", link: "#" },
+        { title: "谁还记得当年那个轰动一时的解密帖？", author: "记忆碎片", reply: "2016-05-03 14:22 by 老用户002", link: "#" },
+        { title: "管理员账号似乎被盗了，乱发公告", author: "警惕者", reply: "2016-04-15 11:11 by 安全第一", link: "#" },
+        { title: "尝试注册新账号，结果直接报错", author: "新人", reply: "2016-04-10 19:40 by 焦虑的会员", link: "#" },
+        { title: "网页快照里还能看到一些已经消失的帖子", author: "考古学家", reply: "2016-04-05 22:55 by 资料收集狂", link: "#" },
+        { title: "论坛关闭的真正原因会不会与那个██项目有关？", author: "深喉", reply: "2016-05-02 03:30 by 匿名", link: "#" },
+        { title: "纪念我们逝去的青春和这个破论坛", author: "过客", reply: "2016-05-20 00:10 by 流浪的猫", link: "#" },
+        { title: "关闭前最后一水，希望未来有人能重建", author: "最后的人", reply: "2016-05-20 20:20 by 最后的守护者", link: "#" },
+        { title: "【错误日志】SQL连接失败，请检查config.php", author: "system", reply: "2016-05-21 00:00 by system", link: "#", isSystem: true }
+    ];
+
+    const postsPerPage = 10;
+    let currentPage = 1;
+    const totalPages = Math.ceil(allPosts.length / postsPerPage);
+
+    // 渲染帖子表格
+    function renderPosts(page) {
+        const tbody = document.getElementById('post-list-body');
+        tbody.innerHTML = '';
+        const start = (page - 1) * postsPerPage;
+        const end = Math.min(start + postsPerPage, allPosts.length);
+        for (let i = start; i < end; i++) {
+            const post = allPosts[i];
+            const tr = document.createElement('tr');
+            let titleHtml = '';
+            if (post.deleted) {
+                titleHtml = `<span class="deleted-thread" title="该帖已被删除">[已删除] ${post.title.replace('[已删除] ', '')}</span>`;
+            } else if (post.link && post.link !== '#') {
+                titleHtml = `<a href="${post.link}">${post.title}</a>`;
+            } else {
+                titleHtml = `<a href="#">${post.title}</a>`;
+            }
+            if (post.isImportant) {
+                titleHtml += ' <span class="warning-badge">重要</span>';
+            }
+            if (post.isSystem) {
+                titleHtml += ' <span style="color:#c00; font-size:10px;">[系统]</span>';
+            }
+            tr.innerHTML = `
+                <td class="post-title">${titleHtml}</td>
+                <td>${post.author}</td>
+                <td class="post-meta">${post.reply}</td>
+            `;
+            tbody.appendChild(tr);
+        }
+    }
+
+    // 渲染分页栏
+    function renderPagination(current) {
+        const pagDiv = document.getElementById('pagination');
+        let html = '';
+        // 前一页
+        if (current > 1) {
+            html += `<a onclick="goToPage(${current - 1})">‹ 上一页</a>`;
+        } else {
+            html += `<span class="disabled">‹ 上一页</span>`;
+        }
+        // 页码
+        for (let i = 1; i <= totalPages; i++) {
+            if (i === current) {
+                html += `<span class="current">${i}</span>`;
+            } else {
+                // 第一页之外点击需要管理员权限
+                html += `<a onclick="goToPage(${i})">${i}</a>`;
+            }
+        }
+        // 后一页
+        if (current < totalPages) {
+            html += `<a onclick="goToPage(${current + 1})">下一页 ›</a>`;
+        } else {
+            html += `<span class="disabled">下一页 ›</span>`;
+        }
+        // 总页数提示
+        html += `<span style="margin-left:10px; font-size:11px; color:#888;">共 ${totalPages} 页</span>`;
+        pagDiv.innerHTML = html;
+    }
+
+    // 翻页函数
+    function goToPage(page) {
+        if (page < 1 || page > totalPages) return;
+        // 模拟：只有管理员才能访问第一页之后的页面
+        if (page > 1 && !isLoggedIn) {
+            alert('权限不足：只有管理员账号才能浏览归档页面。请先登录。');
+            // 如果已登录但非管理员，同样提示（这里登录就是admin，所以简单处理）
+            return;
+        }
+        currentPage = page;
+        renderPosts(currentPage);
+        renderPagination(currentPage);
+    }
+
+    // ========== 登录系统 ==========
+    let isLoggedIn = false;
+    // 预设管理员账号（可根据需要修改）
+    const ADMIN_USER = "admin";
+    const ADMIN_PASS = "ultratruth2024";  // 给朋友的密码可以设为他们知道的梗
+
+    function openLogin() {
+        if (isLoggedIn) {
+            alert('您已登录为管理员。');
+            return;
+        }
+        document.getElementById('login-modal').classList.add('active');
+        document.getElementById('login-username').value = '';
+        document.getElementById('login-password').value = '';
+        document.getElementById('login-error').style.display = 'none';
+    }
+
+    function closeLogin() {
+        document.getElementById('login-modal').classList.remove('active');
+    }
+
+    function performLogin() {
+        const username = document.getElementById('login-username').value.trim();
+        const password = document.getElementById('login-password').value;
+        const errorEl = document.getElementById('login-error');
+        if (username === ADMIN_USER && password === ADMIN_PASS) {
+            // 登录成功
+            isLoggedIn = true;
+            document.getElementById('login-status').style.display = 'inline';
+            document.getElementById('btn-login').style.display = 'none';
+            document.getElementById('btn-register').style.display = 'none';
+            closeLogin();
+            // 如果当前在第一页之后，刷新页面以解锁翻页（状态已变）
+            if (currentPage > 1) {
+                goToPage(currentPage);
+            }
+            alert('登录成功！您已获得管理员权限，可以浏览所有存档页面。');
+        } else {
+            errorEl.style.display = 'block';
+            // 震动一下输入框
+            document.getElementById('login-username').style.borderColor = '#c00';
+            document.getElementById('login-password').style.borderColor = '#c00';
+            setTimeout(() => {
+                document.getElementById('login-username').style.borderColor = '#aaa';
+                document.getElementById('login-password').style.borderColor = '#aaa';
+            }, 1000);
+        }
+    }
+
+    // 监听回车键登录
+    document.addEventListener('keydown', function(e) {
+        if (e.key === 'Enter' && document.getElementById('login-modal').classList.contains('active')) {
+            performLogin();
+        }
+    });
+
+    // 点击模态框外部关闭
+    document.getElementById('login-modal').addEventListener('click', function(e) {
+        if (e.target === this) closeLogin();
+    });
+
+    // ========== 初始加载 ==========
+    window.onload = function() {
+        // 默认展示第一页
+        currentPage = 1;
+        renderPosts(currentPage);
+        renderPagination(currentPage);
+        // 登录状态初始隐藏
+        document.getElementById('login-status').style.display = 'none';
+        // 注册按钮始终禁用，已经用 disabled 属性保证
+    };
+</script>
+</body>
+</html>
